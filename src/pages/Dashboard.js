@@ -7,22 +7,25 @@ const Dashboard = () => {
   const [tickets, setTickets] = useState(null)
   const { categories, setCategories } = useContext(CategoriesContext)
 
-  useEffect(async () => {
-    const response = await axios.get('http://localhost:8000/tickets')
+  useEffect(() => {
+    const getTickets = async () => {
+      const response = await axios.get('http://localhost:8000/tickets')
 
-    //wasn't sure how to get the Documet Id with the object.. open to better suggestions
-    const dataObject = response.data.data
+      //wasn't sure how to get the Documet Id with the object.. open to better suggestions
+      const dataObject = response.data.data
 
-    const arrayOfKeys = Object.keys(dataObject)
-    const arrayOfData = Object.keys(dataObject).map((key) => dataObject[key])
-    const formattedArray = []
-    arrayOfKeys.forEach((key, index) => {
-      const formmatedData = { ...arrayOfData[index] }
-      formmatedData['documentId'] = key
-      formattedArray.push(formmatedData)
-    })
+      const arrayOfKeys = Object.keys(dataObject)
+      const arrayOfData = Object.keys(dataObject).map((key) => dataObject[key])
+      const formattedArray = []
+      arrayOfKeys.forEach((key, index) => {
+        const formmatedData = { ...arrayOfData[index] }
+        formmatedData['documentId'] = key
+        formattedArray.push(formmatedData)
+      })
 
-    setTickets(formattedArray)
+      setTickets(formattedArray)
+    }
+    getTickets()
   }, [])
 
   useEffect(() => {
