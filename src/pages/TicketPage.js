@@ -16,9 +16,10 @@ const TicketPage = ({ editMode }) => {
   let { id } = useParams()
 
   const handleChange = (e) => {
-    const value = e.target.value
-    const name = e.target.name
-
+    let [value, name] = [e.target.value, e.target.name]
+    if(name === 'priority') {
+      value = Number(value)
+    }
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -117,7 +118,7 @@ const TicketPage = ({ editMode }) => {
                 type="radio"
                 onChange={handleChange}
                 value={1}
-                checked={formData.priority == 1}
+                checked={formData.priority === 1}
               />
               <label htmlFor="priority-1">1</label>
               <input
@@ -126,7 +127,7 @@ const TicketPage = ({ editMode }) => {
                 type="radio"
                 onChange={handleChange}
                 value={2}
-                checked={formData.priority == 2}
+                checked={formData.priority === 2}
               />
               <label htmlFor="priority-2">2</label>
               <input
@@ -135,7 +136,7 @@ const TicketPage = ({ editMode }) => {
                 type="radio"
                 onChange={handleChange}
                 value={3}
-                checked={formData.priority == 3}
+                checked={formData.priority === 3}
               />
               <label htmlFor="priority-3">3</label>
               <input
@@ -144,7 +145,7 @@ const TicketPage = ({ editMode }) => {
                 type="radio"
                 onChange={handleChange}
                 value={4}
-                checked={formData.priority == 4}
+                checked={formData.priority === 4}
               />
               <label htmlFor="priority-4">4</label>
               <input
@@ -153,7 +154,7 @@ const TicketPage = ({ editMode }) => {
                 type="radio"
                 onChange={handleChange}
                 value={5}
-                checked={formData.priority == 5}
+                checked={formData.priority === 5}
               />
               <label htmlFor="priority-5">5</label>
             </div>
